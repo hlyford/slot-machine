@@ -9,17 +9,18 @@ angular.module('slotmachine.slots', [])
 	]
 	$scope.reward;
 
-
 	var drinkOptions = ["coffee", "tea", "espresso"];
 	
 	$scope.leverClick = function() {	
-		// spin and select results
+		// spin and select results		
+				
 		selectResult();
+				
 	}
 
 	// conducts an individual random selection of the reels
 	function spin (spinCount, callback) {		
-		var spinResults = [], randomNumber;
+		var spinResults = [], randomNumber;				
 		
 		for (var i = 0; i < 3; i++) {
 			// select a number between 1 and 3 (inclusive)
@@ -32,10 +33,10 @@ angular.module('slotmachine.slots', [])
 		$scope.slotData[2].result = spinResults[2], $scope.slotData[2].imgSlug = "../images/" + drinkOptions[spinResults[2]] + "3.png";				
 				
 		// call spin again or go into the callback to check if winner
-		if (spinCount < -12 ) {			
-			setTimeout(function() {
-				spin(spinCount + 1, callback);			
-			}, 1000);						
+		if (spinCount < -5) {			
+			setTimeout(function() {								
+				spin(spinCount + 1, callback);							
+			}, 100);						
 		} else {						
 			callback();	
 		}
