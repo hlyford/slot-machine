@@ -1,12 +1,5 @@
-- put images in front of grid that has events bound
-- click the button, set timeout, thing spins, show results
+potential improvements:
 
-1) scramble icons as state changes; end on final state; call spin recursively with intervals getting longer until stopping on one
-- what if it hits the same one??
-
-2) CSS animaition to roll through the list of items
-
-
-to do:
-- reset background images if play again -> re-add $.css background
-- modal img does not display if win  -> changes to background img
+1) slowly move to final selection 
+	- store the y-axis location of each selection on $scope for the reel
+	- use transition to ease into that selection
