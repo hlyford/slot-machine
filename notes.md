@@ -8,5 +8,5 @@
 
 
 to do:
-- reset background images if play again 
-- modal img does not display if win
+- reset background images if play again -> re-add $.css background
+- modal img does not display if win  -> changes to background img

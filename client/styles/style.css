@@ -127,6 +127,14 @@
 	display: block;
 	margin: 0 auto;
 }
+.play-again-btn {
+	height: 70px;
+	width: 170px;
+	margin: 13px 0 13px 0;
+}
+.play-again-btn h2 {
+	margin: 0;
+}
 
 /*media queries for smaller screens*/
 @media (max-width: 1250px) {	

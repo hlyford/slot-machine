@@ -6,17 +6,20 @@
 			<!-- three slot reels -->			
 			<div class="reel-container">
 				<div class="slots slot-one"></div>
-				<div class="slots slot-two"><img ng-src="{{ slotData[1].imgSlug }}" ng-hide='true'></div>
-				<div class="slots slot-three"><img ng-src="{{ slotData[2].imgSlug }}" ng-hide='true'></div>
+				<div class="slots slot-two"></div>
+				<div class="slots slot-three"></div>
 			</div>
 			<!-- button to start slots -->				
-			<div class="button-container">							
+			<div class="button-container" ng-show="!gameOver()">					
 				<div class="spin-text"><h2>Take a spin!</h2></div>
 				<div class="round-button">
 	    		<a ng-click="leverClick()">
 	       		<img src="../images/thumbtack_logo_small.png" alt="Home" />
 	    		</a>
 				</div>				
+			</div>
+			<!-- reset button shows when game ends -->
+			<div class="button-container" ng-show="gameOver()">							<button class="btn btn-default play-again-btn" ng-click="resetGame()"><h2>Play again!</h2></button>						
 			</div>
 		</div>				
 	</div>
