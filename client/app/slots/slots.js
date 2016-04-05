@@ -32,6 +32,8 @@ angular.module('slotmachine.slots', [])
 		$('.slot-one').css('background-image', 'url(../images/slot1_all2.png');
 		$('.slot-two').css('background-image', 'url(../images/slot2_all2.png)');
 		$('.slot-three').css('background-image', 'url(../images/slot3_all2.png)');
+		// remove border if user has already played and won
+		$('.reel-container').removeClass('orange-border');
 	}
 
 	// randomly selects a result for each reel
@@ -50,9 +52,7 @@ angular.module('slotmachine.slots', [])
 	}	
 
 	// starts spinning then calls off to stopSpin function
-	function startSpin () {
-		// remove border if user has already played and won
-		$('.reel-container').removeClass('orange-border');
+	function startSpin () {		
 		// start each reel spinning
 		$('.slot-one').addClass('spinning1');
 		$('.slot-two').addClass('spinning2');
@@ -80,10 +80,9 @@ angular.module('slotmachine.slots', [])
 			checkForWinner();
 		}, 2100)
 	}
-	
+
 	// checks if the user has won
 	function checkForWinner () {		
-		console.log('done data', $scope.slotData);			
 		if ($scope.slotData[0].result === $scope.slotData[1].result && $scope.slotData[0].result === $scope.slotData[2].result)	{				
 			// determine the reward
 			if ($scope.slotData[0].result === 0) {$scope.reward = 'coffee'; }
