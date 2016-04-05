@@ -1,5 +1,4 @@
 angular.module('slotmachine.slots', [])
-
 .controller('SlotsController', function ($scope) {  
 	// initial state on load
 	$scope.slotData = [
@@ -8,6 +7,7 @@ angular.module('slotmachine.slots', [])
 		{result: 3, imgSlug: ''},
 	]
 	$scope.reward, $scope.gameStatus = false;
+	// drink strings that are used to create image urls
 	var drinkOptions = ['coffee', 'tea', 'espresso'];
 	
 	// event triggered by user
@@ -17,10 +17,12 @@ angular.module('slotmachine.slots', [])
 		// determine the results
 		selectResult();		
 	}
+
 	// determines the correct button ("spin" vs "play again") to show in UI
 	$scope.gameOver = function () {				
 		return $scope.gameStatus;
 	}
+
 	// resets game so user can spin again
 	$scope.resetGame = function () {
 		$scope.$evalAsync (function () {
@@ -46,6 +48,7 @@ angular.module('slotmachine.slots', [])
 		$scope.slotData[1].result = spinResults[1], $scope.slotData[1].imgSlug = '../images/' + drinkOptions[spinResults[1]] + '2.png';
 		$scope.slotData[2].result = spinResults[2], $scope.slotData[2].imgSlug = '../images/' + drinkOptions[spinResults[2]] + '3.png';																		
 	}	
+
 	// starts spinning then calls off to stopSpin function
 	function startSpin () {
 		// remove border if user has already played and won
@@ -57,6 +60,7 @@ angular.module('slotmachine.slots', [])
 		// stop reels
 		stopSpin();
 	}
+
 	// stops spinning at different time intervals
 	function stopSpin () {
 		// stop reel 1
@@ -76,6 +80,7 @@ angular.module('slotmachine.slots', [])
 			checkForWinner();
 		}, 2100)
 	}
+	
 	// checks if the user has won
 	function checkForWinner () {		
 		console.log('done data', $scope.slotData);			
