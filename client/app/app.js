@@ -5,9 +5,7 @@ app.config(function ($routeProvider, $httpProvider) {
   $routeProvider    
     .when('/', {
       templateUrl: 'app/slots/slots.html',
-      controller: 'SlotsController',      
-    })          
+      controller: 'SlotsController'  
+    })       
     .otherwise({redirectTo: '/'});    
-
-
 })
