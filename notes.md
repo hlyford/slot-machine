@@ -7,7 +7,6 @@
 2) CSS animaition to roll through the list of items
 
 
-other
-- flash orange around border when win
-- media queries for tablet and phone
-- tests 
+to do:
+- reset background images if play again 
+- modal img does not display if win

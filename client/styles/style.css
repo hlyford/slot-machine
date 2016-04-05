@@ -20,7 +20,7 @@
 }
 .reel-container {
 	border: 3px solid black;
-	padding: 2% 0 3% 0;
+	padding: 2% 0 4.5% 0;
 	margin: 0 11% 0 11%;
 	background-color: #464646;
 	border-radius: 10px;
@@ -31,23 +31,57 @@
 }
 .slots {
 	font-size:100px;
-	overflow-y:hidden;
+	overflow: hidden;
   width: 75%;
 	height: 100px;
 	border: 1px solid black;
 	display: inline;
-	margin-right: 5%;
-	padding: 2% 3% 5% 3%;
+	margin-right: 5%;	
 	box-shadow: 0 0 5px #464646;
 	border-radius: 10px;
 	background-color: white;
+	position: relative;
+	background-repeat: repeat-y;
+  padding: 2% 10% 5% 15%;
+  background-size: 91.5%;
+  background-position: 12px 0;   
 }
-.slot-three {
-	margin: 0;
+.slot-one {  
+  background-image: url(../images/slot1_all2.png);   
+}
+.slot-two {  
+  background-image: url(../images/slot2_all2.png);   
+}
+.slot-three {  
+  background-image: url(../images/slot3_all2.png);   
+  margin: 0;
+}
+.spinning1 {
+	-webkit-animation: backgroundScroll 1s linear infinite;
+	animation: backgroundScroll 1s linear infinite;
+}
+.spinning2 {
+	-webkit-animation: backgroundScroll 5s linear infinite;
+	animation: backgroundScroll 7s linear infinite;
+}
+.spinning3 {
+	-webkit-animation: backgroundScroll 8s linear infinite;
+	animation: backgroundScroll 4s linear infinite;
+}
+@-webkit-keyframes backgroundScroll {
+	from {background-position: 12px 0;}
+	to {background-position: 12px 800px;}
+}
+@keyframes backgroundScroll {
+	from {background-position: 12px 0;}
+	to {background-position: 12px 800px;}
 }
 .slots img {
 	width: 150px;
 	height: auto;
+}
+.white-background {
+	background-color: white;
 }
 .button-container {
 	overflow: auto;

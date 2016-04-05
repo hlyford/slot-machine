@@ -1,6 +1,6 @@
 angular.module('slotmachine.slots', [])
 
-.controller('SlotsController', function ($scope, $http, $location) {  
+.controller('SlotsController', function ($scope) {  
 	// initial state on load
 	$scope.slotData = [
 		{result: 1, imgSlug: "../images/coffee1.png"},
@@ -8,18 +8,18 @@ angular.module('slotmachine.slots', [])
 		{result: 3, imgSlug: "../images/espresso3.png"},
 	]
 	$scope.reward;
-
 	var drinkOptions = ["coffee", "tea", "espresso"];
 	
-	$scope.leverClick = function() {	
-		// spin and select results		
-				
-		selectResult();
-				
+	// event triggered by user
+	$scope.leverClick = function() {				
+		// start spinning the reels
+		startSpin();		
+		// determine the results
+		selectResult();		
 	}
 
-	// conducts an individual random selection of the reels
-	function spin (spinCount, callback) {		
+	// randomly selects a result for each reel
+	function selectResult (callback) {		
 		var spinResults = [], randomNumber;				
 		
 		for (var i = 0; i < 3; i++) {
@@ -30,43 +30,58 @@ angular.module('slotmachine.slots', [])
 		// change state to reflect the results				
 		$scope.slotData[0].result = spinResults[0], $scope.slotData[0].imgSlug = "../images/" + drinkOptions[spinResults[0]] + "1.png";
 		$scope.slotData[1].result = spinResults[1], $scope.slotData[1].imgSlug = "../images/" + drinkOptions[spinResults[1]] + "2.png";
-		$scope.slotData[2].result = spinResults[2], $scope.slotData[2].imgSlug = "../images/" + drinkOptions[spinResults[2]] + "3.png";				
-				
-		// call spin again or go into the callback to check if winner
-		if (spinCount < -5) {			
-			setTimeout(function() {								
-				spin(spinCount + 1, callback);							
-			}, 100);						
-		} else {						
-			callback();	
-		}
-		return;
-	}
-	// starts the spinning then determines if user has won
-	function selectResult () {					
+		$scope.slotData[2].result = spinResults[2], $scope.slotData[2].imgSlug = "../images/" + drinkOptions[spinResults[2]] + "3.png";																		
+	}	
+	
+
+	function startSpin () {
 		// remove border if user has already played and won
 		$('.reel-container').removeClass('orange-border');
+		// start each reel spinning
+		$('.slot-one').addClass('spinning1');
+		$('.slot-two').addClass('spinning2');
+		$('.slot-three').addClass('spinning3');		
+		// stop reels
+		stopSpin();
+	}
 
-		// spin the reels; callback checks if user has won
-		spin(0, function() {			
-			console.log('done data', $scope.slotData);			
-			if ($scope.slotData[0].result === $scope.slotData[1].result && $scope.slotData[0].result === $scope.slotData[2].result)	{				
-				// determine the reward
-				if ($scope.slotData[0].result === 0) {$scope.reward = "coffee"; }
-				else if ($scope.slotData[0].result === 1) {$scope.reward = "tea"; }
-				else {$scope.reward = "espresso"; }
-				// flash the border
-				var flashInterval = setInterval(function() {
-    			$('.reel-container').toggleClass('orange-border');
-				}, 100);		
-				// stop the border flash but keep border, show prize		
-				setTimeout(function() {					
-					window.clearInterval(flashInterval);
-					$('.reel-container').addClass('orange-border');
-					$(".bs-example-modal-sm").modal();
-				}, 1000);
-			}
-		});		
+	function stopSpin () {
+		// stop reel 1
+		setTimeout(function() {
+			$('.slots').removeClass('spinning1');
+			$('.slot-one').css('background-image', "url(" + $scope.slotData[0].imgSlug + ")");
+		}, 1200)
+		// stop reel 2
+		setTimeout(function() {
+			$('.slots').removeClass('spinning2');
+			$('.slot-two').css('background-image', "url(" + $scope.slotData[1].imgSlug + ")");
+		}, 1800)
+		// stop reel 3
+		setTimeout(function() {
+			$('.slots').removeClass('spinning3');
+			$('.slot-three').css('background-image', "url(" + $scope.slotData[2].imgSlug + ")");
+			checkResult();
+		}, 2100)
+	}
+
+	function checkResult() {		
+		console.log('done data', $scope.slotData);			
+		if ($scope.slotData[0].result === $scope.slotData[1].result && $scope.slotData[0].result === $scope.slotData[2].result)	{				
+			// determine the reward
+			if ($scope.slotData[0].result === 0) {$scope.reward = "coffee"; }
+			else if ($scope.slotData[0].result === 1) {$scope.reward = "tea"; }
+			else {$scope.reward = "espresso"; }
+			// flash the border
+			var flashInterval = setInterval(function() {
+  			$('.reel-container').toggleClass('orange-border');
+			}, 100);		
+			// stop the border flash but keep border, show prize		
+			setTimeout(function() {					
+				window.clearInterval(flashInterval);
+				$('.reel-container').addClass('orange-border');
+				$(".bs-example-modal-sm").modal();
+			}, 1000);
+		}		
 	}
 
 
